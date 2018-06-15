@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../assets/style.css">
+</head>
+<body>
+
+<div class="filter">
+    <form action="controller.php" method="GET">
+        <div>
+            <div>ТИП НЕДВИЖИМОСТИ:</div>
+            <select name="property">
+                <?php foreach ( $viewModel->property as $key=>$item ) : ?>
+                <option value="<?php echo $key; ?>" <?php echo $item['isSelected'] ?>><?php echo $item['value'] ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div>
+            <div>ЦЕНА(РУБЛЕЙ):</div>
+            <input type="number" name="price_from" value="<?php echo $viewModel->price_from?>">
+            <input type="number" name="price_to" value="<?php echo $viewModel->price_to?>">
+        </div>
+        <div>
+            <div>КОМНАТ:</div>
+            <select name="rooms[]" multiple>
+                <?php foreach ( $viewModel->rooms as $key=>$item ) : ?>
+                <option value="<?php echo $key; ?>" <?php echo $item['isSelected'] ?>><?php echo $item['value'] ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div>
+            <label class="for" for="only_photo">только с фото</label>
+            <input type="checkbox" name="only_photo" id="only_photo" <?php echo $viewModel->only_photo?> >
+        </div>
+
+        <div>
+            <input type="submit" value="Найти" name="search">
+        </div>
+    </form>
+</div>
+<div class="content">
+    <?php echo $content; ?>
+</div>
+
+</body>
+</html>
